@@ -14,6 +14,7 @@
   ];
   networking.hostName = "amg";
   home-manager = {
+    backupFileExtension = ".hmbak";
     users."admin" = import ../../home/homes/amg;
     extraSpecialArgs = {
       inherit inputs;

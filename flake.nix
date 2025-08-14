@@ -26,6 +26,7 @@
     ...
   } @ inputs: let
     pkgs = import nixpkgs {
+      config.allowUnfree = true;
       system = "x86_64-linux";
       overlays = [
         (import ./overlays/default.nix)
@@ -45,6 +46,7 @@
       default = self.packages.${pkgs.system}.mactahoe-icons;
       mactahoe-icons = pkgs.mactahoe-icons;
       mactahoe-theme = pkgs.mactahoe-theme;
+      sfpro = pkgs.sf-pro;
     };
   };
 }

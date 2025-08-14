@@ -12,7 +12,7 @@
 }: let
   pname = "mactahoe-icon-theme";
 in
-lib.checkListOfEnum "colloid-icon-theme: scheme variants"
+  lib.checkListOfEnum "colloid-icon-theme: scheme variants"
   [
     "default"
     "nord"

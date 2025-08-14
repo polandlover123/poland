@@ -4,13 +4,19 @@
   ...
 }: {
   home = {
-    sessionVariables.GTK_THEME = "Everforest-Dark-Medium-BL";
+    sessionVariables.GTK_THEME = "WhiteSur-Dark";
     packages = with pkgs; [dconf];
   };
   dconf = {
     enable = true;
     settings = {
-      "org/gnome/desktop/interface" = {color-scheme = "prefer-dark";};
+      "org/gnome/desktop/interface" = {
+        gtk-theme = "WhiteSur-Dark";
+        color-scheme = "prefer-dark";
+      };
+      "org/gtk/settings/file-chooser" = {
+        sort-directories-first = true;
+      };
     };
   };
   home.pointerCursor = {
@@ -22,15 +28,21 @@
   gtk = {
     enable = true;
     theme = {
-      name = "MacTahoe-Dark";
-      package = pkgs.mactahoe-theme;
+      name = "WhiteSur-Dark";
+      package = pkgs.whitesur-gtk-theme.override {
+        nautilusStyle = "glassy";
+        darkerColor = true;
+        roundedMaxWindow = true;
+      };
     };
     iconTheme = {
       name = "MacTahoe";
       package = pkgs.mactahoe-icons;
     };
     font = {
-      name = "Fira Sans";
+      name = "SF-Pro Display";
+      size = 12;
+      package = pkgs.sf-pro;
     };
   };
 }

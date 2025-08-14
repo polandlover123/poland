@@ -8,7 +8,9 @@
     username = "admin";
     homeDirectory = "/home/admin";
   };
-  programs.home-manager.enable = true;
+  programs.home-manager = {
+    enable = true;
+  };
 
   nixpkgs = {
     overlays = [

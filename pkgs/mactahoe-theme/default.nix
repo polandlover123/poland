@@ -11,17 +11,16 @@
   dialog,
   libxml2,
   glib,
-  themeVariants ? [ ], # default: blue
-  colorVariants ? [ ], # default: all
-  sizeVariants ? [ ], # default: standard
-  tweaks ? [ ],
-}:
-
-let
+  gtk4,
+  libadwaita,
+  themeVariants ? [], # default: blue
+  colorVariants ? [], # default: all
+  sizeVariants ? [], # default: standard
+  tweaks ? [],
+}: let
   pname = "mactahoe-gtk-theme";
-
 in
-lib.checkListOfEnum "mactahoe-gtk-theme: theme variants"
+  lib.checkListOfEnum "mactahoe-gtk-theme: theme variants"
   [
     "default"
     "purple"
@@ -37,11 +36,11 @@ lib.checkListOfEnum "mactahoe-gtk-theme: theme variants"
   themeVariants
   lib.checkListOfEnum
   "mactahoe-gtk-theme: color variants"
-  [ "standard" "light" "dark" ]
+  ["standard" "light" "dark"]
   colorVariants
   lib.checkListOfEnum
   "mactahoe-gtk-theme: size variants"
-  [ "standard" "compact" ]
+  ["standard" "compact"]
   sizeVariants
   lib.checkListOfEnum
   "mactahoe-gtk-theme: tweaks"
@@ -58,19 +57,17 @@ lib.checkListOfEnum "mactahoe-gtk-theme: theme variants"
     "float"
   ]
   tweaks
-
   stdenvNoCC.mkDerivation
   rec {
     inherit pname;
-    version = "2025-07-09";
+    version = "19dfe5f20287485074bae07bc5a9b1318be5d4c0";
 
     src = fetchFromGitHub {
       owner = "vinceliuice";
       repo = "mactahoe-gtk-theme";
       rev = version;
-      hash = "sha256-wfGS/DyyBt1xjYS4de0cwGNQ5Appvo2aSFlDVR3G6zM=";
+      hash = "sha256-UIwqygouGrfuWs8mXUNkBs9/J3XZ/x5jv8Ftnt5Q824=";
     };
-
 
     nativeBuildInputs = [
       dialog
@@ -80,6 +77,8 @@ lib.checkListOfEnum "mactahoe-gtk-theme: theme variants"
       sassc
       util-linux
       getent
+      gtk4
+      libadwaita
     ];
 
     buildInputs = [
@@ -106,7 +105,7 @@ lib.checkListOfEnum "mactahoe-gtk-theme: theme variants"
 
       mkdir -p $out/share/themes
 
-      ./install.sh --dest $out/share/themes
+      ./install.sh -t blue -c dark -b --dest $out/share/themes
 
       jdupes --quiet --link-soft --recurse $out/share
 
@@ -118,6 +117,6 @@ lib.checkListOfEnum "mactahoe-gtk-theme: theme variants"
       homepage = "https://github.com/vinceliuice/mactahoe-gtk-theme";
       license = licenses.gpl3Only;
       platforms = platforms.unix;
-      maintainers = [ maintainers.romildo ];
+      maintainers = [maintainers.romildo];
     };
   }

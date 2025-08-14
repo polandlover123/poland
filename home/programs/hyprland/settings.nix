@@ -2,11 +2,20 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: {
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
+      exec-once = [
+        "spotify"
+        "webcord"
+        "swww-daemon"
+        "swayosd-server"
+        "${pkgs.clipse}/bin/clipse -listen"
+        "hyprctl setcursor macOS 22"
+      ];
       animations.enabled = false;
       binds = {
         workspace_center_on = 1;
@@ -74,12 +83,13 @@
           render_power = 4;
           color = "rgb(161616)";
         };
-        rounding = 0;
+        rounding = 20;
         blur = {
           passes = 3;
-          size = 10;
+          size = 8;
           xray = true;
           special = true;
+          brightness = 0.5;
         };
       };
       dwindle = {
