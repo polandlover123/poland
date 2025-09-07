@@ -1,0 +1,22 @@
+* {
+  all: unset;
+  border: none;
+  border-radius: 0;
+  font-family: SF Pro Display;
+  font-size: 17px;
+  margin: 0;
+  padding: 0;
+  min-height: 15px;
+}
+
+#waybar {
+  background: rgba(28, 28, 28, 0.1);
+  border-bottom: 1px solid #000000;
+  padding: 4px 10px;
+}
+
+#clock {
+  color: #ffffff;
+  padding-left: 10px;
+  padding-right: 10px;
+}

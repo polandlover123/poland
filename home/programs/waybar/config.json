@@ -1,0 +1,16 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 21,
+  "modules-left": [
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+  ],
+  "clock#clock": {
+    "format": " {:%i:%I %p}",
+    "tooltip": false
+  }
+}

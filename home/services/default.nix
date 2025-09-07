@@ -2,5 +2,6 @@
   imports = [
     ./fonts
     ./gtk
+    ./astal
   ];
 }

@@ -11,13 +11,9 @@
       url = "github:viperml/nh";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland = {
-      type = "git";
-      url = "https://github.com/hyprwm/hyprland";
-      ref = "refs/tags/v0.48.1";
-      submodules = true;
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    ags.url = "github:aylur/ags";
+    astal.url = "github:aylur/astal";
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = {

@@ -40,7 +40,7 @@
       package = pkgs.mactahoe-icons;
     };
     font = {
-      name = "SF-Pro Display";
+      name = "SF Pro Display";
       size = 12;
       package = pkgs.sf-pro;
     };

@@ -107,8 +107,10 @@ in {
         ",xf86monbrightnessup, exec, brightnessctl s +5%"
         ",xf86monbrightnessdown, exec, brightnessctl s 5%-"
       ];
-      bindl = [
-        ", switch:[intel hid switches], exec, alacritty"
+      gesture = [
+        "3, horizontal, mod: SUPER, resize"
+        "2, pinch, mod:super, resize"
+        "3, horizontal, mod:supershift, scale: 4.0, move"
       ];
     };
   };

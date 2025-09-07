@@ -45,7 +45,7 @@
         extend_border_grab_area = 30;
         hover_icon_on_border = false;
         gaps_in = 5;
-        gaps_out = 10;
+        gaps_out = 0,10,0,10;
         border_size = 0;
         layout = "dwindle";
       };
@@ -62,10 +62,6 @@
           clickfinger_behavior = true;
         };
         sensitivity = 0;
-      };
-      gestures = {
-        workspace_swipe_cancel_ratio = 0.15;
-        workspace_swipe = true;
       };
       group = {
         groupbar = {
@@ -85,11 +81,12 @@
         };
         rounding = 20;
         blur = {
-          passes = 3;
-          size = 8;
-          xray = true;
+          popups = true;
+          contrast = 1;
+          passes = 2;
+          size = 1;
           special = true;
-          brightness = 0.5;
+          brightness = 1;
         };
       };
       dwindle = {

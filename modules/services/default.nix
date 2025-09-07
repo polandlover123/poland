@@ -1,9 +1,6 @@
 {
   imports = [
-    ./nix
-    ./desktop
-    ./security
-    ./services
+    ./bluetooth
   ];
   services.fwupd.enable = true;
 }

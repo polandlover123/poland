@@ -23,8 +23,13 @@
       "bordersize 0, floating:0, onworkspace:f[1]"
       "rounding 0, floating:0, onworkspace:f[1]"
     ];
-    layerrule = let
-      layers = "^(anyrun|gtk-layer-shell|swayosd)$";
-    in ["blur, ${layers}" "ignorealpha 0.2, ${layers}"];
+    layerrule = [
+      "blur, waybar"
+      "blurpopups, firefox"
+      "blur, firefox"
+      "blur, gtk4-layer-shell"
+      "ignorealpha 0.2, bar"
+      "ignorealpha 0.2, gtk4-layer-shell"
+    ];
   };
 }
