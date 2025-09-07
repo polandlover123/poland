@@ -45,7 +45,7 @@
         extend_border_grab_area = 30;
         hover_icon_on_border = false;
         gaps_in = 5;
-        gaps_out = 0,10,0,10;
+        gaps_out = 10;
         border_size = 0;
         layout = "dwindle";
       };

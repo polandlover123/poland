@@ -12,6 +12,7 @@
   environment.systemPackages = [
     pkgs.spotify
   ];
+  programs.ssh.startAgent = true;
   programs.steam.enable = true;
   networking.hostName = "amg";
   home-manager = {
