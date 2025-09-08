@@ -3,7 +3,7 @@ import { Astal, Gtk, Gdk } from "ags/gtk4"
 import { execAsync } from "ags/process"
 import { createPoll } from "ags/time"
 import Clock from "./Clock"
-
+import Submap from "./Submap"
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const time = createPoll("", 1000, "date")
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
@@ -21,7 +21,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       <centerbox cssName="centerbox" class="centerbox">
         <box $type="start" class={"start"}>
           <box class="leftsidebox">
-            something
+            <Submap/>
           </box>
         </box>
         <box $type="center" class="notch">

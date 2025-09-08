@@ -5,11 +5,15 @@ import Hyprland from "gi://AstalHyprland"
 
 export default function Submap() {
     const hyprland = Hyprland.get_default()
-    const current = hyprland.message("submap").trim()
+    const focused = createBinding(hyprland, "focusedClient")
+    const title = focused.as((client) => {
+      const foo = client.initial_class;
+      return foo.toLowerCase();
+    });
     return (
       <box>
         <label
-          label={current}
+          label={title}
         />
       </box>
     )
