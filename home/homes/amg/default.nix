@@ -4,6 +4,7 @@
   ];
   home.packages = with pkgs; [
     nautilus
+    gh
   ];
   monitors = {
     "eDP-1" = {

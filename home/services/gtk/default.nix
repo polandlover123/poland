@@ -4,14 +4,14 @@
   ...
 }: {
   home = {
-    sessionVariables.GTK_THEME = "WhiteSur-Dark";
+    sessionVariables.GTK_THEME = "MacTahoe-Dark";
     packages = with pkgs; [dconf];
   };
   dconf = {
     enable = true;
     settings = {
       "org/gnome/desktop/interface" = {
-        gtk-theme = "WhiteSur-Dark";
+        gtk-theme = "MacTahoe-Dark";
         color-scheme = "prefer-dark";
       };
       "org/gtk/settings/file-chooser" = {
@@ -28,15 +28,11 @@
   gtk = {
     enable = true;
     theme = {
-      name = "WhiteSur-Dark";
-      package = pkgs.whitesur-gtk-theme.override {
-        nautilusStyle = "glassy";
-        darkerColor = true;
-        roundedMaxWindow = true;
-      };
+      name = "MacTahoe-Dark";
+      package = pkgs.mactahoe-theme;
     };
     iconTheme = {
-      name = "MacTahoe";
+      name = "MacTahoe-dark";
       package = pkgs.mactahoe-icons;
     };
     font = {

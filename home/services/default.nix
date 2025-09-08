@@ -3,5 +3,6 @@
     ./fonts
     ./gtk
     ./astal
+    ./polkit
   ];
 }

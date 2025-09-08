@@ -1,72 +1,108 @@
 {
   lib,
-  stdenvNoCC,
+  stdenv,
   fetchFromGitHub,
+  gitUpdater,
+  dialog,
+  glib,
   gnome-themes-extra,
-  gtk-engine-murrine,
   jdupes,
-  getent,
+  libxml2,
   sassc,
   util-linux,
-  dialog,
-  libxml2,
-  glib,
-  gtk4,
-  libadwaita,
-  themeVariants ? [], # default: blue
-  colorVariants ? [], # default: all
-  sizeVariants ? [], # default: standard
-  tweaks ? [],
-}: let
+  altVariants ? [ ], # default: normal
+  colorVariants ? [ ], # default: all
+  opacityVariants ? [ ], # default: all
+  themeVariants ? [ ], # default: default (BigSur-like theme)
+  schemeVariants ? [ ], # default: standard
+  iconVariant ? null, # default: standard (Apple logo)
+  # nautilusStyle ? null, # default: stable (BigSur-like style)
+  panelOpacity ? null, # default: 15%
+  panelSize ? null, # default: 32px
+  roundedMaxWindow ? false, # default: false
+  blurVariant ? false, # default = false
+  darkerColor ? false, # default = false
+}:
+
+let
   pname = "mactahoe-gtk-theme";
+  single = x: lib.optional (x != null) x;
+
 in
-  lib.checkListOfEnum "mactahoe-gtk-theme: theme variants"
+lib.checkListOfEnum "${pname}: window control buttons variants" [ "normal" "alt" "all" ] altVariants
+  lib.checkListOfEnum
+  "${pname}: color variants"
+  [ "light" "dark" ]
+  colorVariants
+  lib.checkListOfEnum
+  "${pname}: opacity variants"
+  [ "normal" "solid" ]
+  opacityVariants
+  lib.checkListOfEnum
+  "${pname}: accent color variants"
   [
     "default"
+    "blue"
     "purple"
     "pink"
     "red"
     "orange"
     "yellow"
     "green"
-    "teal"
     "grey"
     "all"
   ]
   themeVariants
   lib.checkListOfEnum
-  "mactahoe-gtk-theme: color variants"
-  ["standard" "light" "dark"]
-  colorVariants
+  "${pname}: colorscheme style variants"
+  [ "standard" "nord" ]
+  schemeVariants
   lib.checkListOfEnum
-  "mactahoe-gtk-theme: size variants"
-  ["standard" "compact"]
-  sizeVariants
-  lib.checkListOfEnum
-  "mactahoe-gtk-theme: tweaks"
+  "${pname}: activities icon variants"
   [
-    "nord"
-    "dracula"
-    "gruvbox"
-    "everforest"
-    "catppuccin"
-    "all"
-    "black"
-    "rimless"
-    "normal"
-    "float"
+    "standard"
+    "apple"
+    "simple"
+    "gnome"
+    "ubuntu"
+    "tux"
+    "arch"
+    "manjaro"
+    "fedora"
+    "debian"
+    "void"
+    "opensuse"
+    "popos"
+    "mxlinux"
+    "zorin"
+    "budgie"
+    "gentoo"
   ]
-  tweaks
-  stdenvNoCC.mkDerivation
+  (single iconVariant)
+  # lib.checkListOfEnum
+  # "${pname}: nautilus style"
+  # [ "stable" "normal" "mojave" "glassy" "right" ]
+  # (single nautilusStyle)
+  lib.checkListOfEnum
+  "${pname}: panel opacity"
+  [ "default" "30" "45" "60" "75" ]
+  (single panelOpacity)
+  lib.checkListOfEnum
+  "${pname}: panel size"
+  [ "default" "smaller" "bigger" ]
+  (single panelSize)
+
+  stdenv.mkDerivation
   rec {
-    inherit pname;
-    version = "19dfe5f20287485074bae07bc5a9b1318be5d4c0";
+    pname = "mactahoe-gtk-theme";
+    # version = "2025-07-09";
+    version = "master";
 
     src = fetchFromGitHub {
       owner = "vinceliuice";
-      repo = "mactahoe-gtk-theme";
+      repo = "MacTahoe-gtk-theme";
       rev = version;
-      hash = "sha256-UIwqygouGrfuWs8mXUNkBs9/J3XZ/x5jv8Ftnt5Q824=";
+      hash = "sha256-wfGS/DyyBt1xjYS4de0cwGNQ5Appvo2aSFlDVR3G6zM=";
     };
 
     nativeBuildInputs = [
@@ -76,18 +112,12 @@ in
       libxml2
       sassc
       util-linux
-      getent
-      gtk4
-      libadwaita
     ];
 
     buildInputs = [
-      gnome-themes-extra
+      gnome-themes-extra # adwaita engine for Gtk2
     ];
 
-    propagatedUserEnvPkgs = [
-      gtk-engine-murrine
-    ];
     postPatch = ''
       find -name "*.sh" -print0 | while IFS= read -r -d ''' file; do
         patchShebangs "$file"
@@ -100,23 +130,41 @@ in
       substituteInPlace libs/lib-core.sh --replace-fail 'MY_HOME=$(getent passwd "''${MY_USERNAME}" | cut -d: -f6)' 'MY_HOME=/tmp'
     '';
 
+    dontBuild = true;
+
+    # ${lib.optionalString (nautilusStyle != null) ("--nautilus " + nautilusStyle)} \
+
     installPhase = ''
       runHook preInstall
 
       mkdir -p $out/share/themes
 
-      ./install.sh -t blue -c dark -b --dest $out/share/themes
+      ./install.sh \
+        ${toString (map (x: "--alt " + x) altVariants)} \
+        ${toString (map (x: "--color " + x) colorVariants)} \
+        ${toString (map (x: "--opacity " + x) opacityVariants)} \
+        ${toString (map (x: "--theme " + x) themeVariants)} \
+        ${toString (map (x: "--scheme " + x) schemeVariants)} \
+        ${lib.optionalString roundedMaxWindow "--roundedmaxwindow"} \
+        ${lib.optionalString blurVariant "--blur"} \
+        ${lib.optionalString darkerColor "--darkercolor"} \
+        ${lib.optionalString (iconVariant != null) ("--gnome-shell -i " + iconVariant)} \
+        ${lib.optionalString (panelSize != null) ("--gnome-shell -panelheight " + panelSize)} \
+        ${lib.optionalString (panelOpacity != null) ("--gnome-shell -panelopacity " + panelOpacity)} \
+        --dest $out/share/themes
 
       jdupes --quiet --link-soft --recurse $out/share
 
       runHook postInstall
     '';
 
-    meta = with lib; {
-      description = "Modern and clean Gtk theme";
-      homepage = "https://github.com/vinceliuice/mactahoe-gtk-theme";
-      license = licenses.gpl3Only;
-      platforms = platforms.unix;
-      maintainers = [maintainers.romildo];
+    passthru.updateScript = gitUpdater { };
+
+    meta = {
+      description = "MacTahoe like Gtk+ theme based on Elegant Design";
+      homepage = "https://github.com/vinceliuice/MacTahoe-gtk-theme";
+      license = lib.licenses.mit;
+      platforms = lib.platforms.unix;
+      # maintainers = with lib.maintainers; [ ];
     };
   }

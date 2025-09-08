@@ -3,5 +3,6 @@
     ./hyprland
     ./alacritty
     ./waybar
+    ./firefox
   ];
 }
