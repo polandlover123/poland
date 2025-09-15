@@ -22,6 +22,7 @@
     seahorse.enable = true;
     ssh.startAgent = true;
   };
+  services.upower.enable = true;
   programs.steam.enable = true;
   networking.hostName = "amg";
   home-manager = {
