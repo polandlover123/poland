@@ -20,21 +20,18 @@ in {
   ];
   wayland.windowManager.hyprland = {
     extraConfig = ''
-      #-----------------------------------------
       # submap 1
       bind = SUPERSHIFT, space, submap, insert
       submap = insert
       bind = SUPERSHIFT, space, submap, reset
       bind = shift, y, exec, grimblast copysave output
       bind = shift, e, exec, nautilus -w
-      bind = shift, r, exec, alacritty -e nvim ~/parlbomb
+      bind = shift, r, exec, code ~/poland
       bind = shift, d, exec, alacritty -e nvim ~/work/clones/homelab/
-      bind = shift, q, exec, firefox
-      bind = shift, o, exec, obsidian
+      bind = shift, m, exec, firefox
       bind = shift, s, exec, spotify
       bind = shift, a, exec, alacritty
       bind = shift, p, exec, pavucontrol
-      bind = shift, z, exec, google-chrome-stable --new-window
       bind = shift, b, exec, overskride
 
       bind = shift, c, exec, code
@@ -81,7 +78,6 @@ in {
           # programs
           "supershift, tab, exec, swaync-client -t"
           "super, escape, exec, hyprlock"
-          "super, e, exec, nautilus --new-window"
           "super, n, exec, alacritty"
           "super, v, exec, alacritty --class clipse -e 'clipse'"
           "super, b, exec, firefox"
@@ -92,11 +88,11 @@ in {
           # screenshotting
           "super, s, exec, grimblast copysave area"
           #volume
-          ", xf86audioplay, exec, playerctl play-pause"
-          ", xf86audiopause, exec, playerctl play-pause"
-          ", xf86audiomute,exec, swayosd-client --output-volume mute-toggle "
+          ",xf86audioplay, exec, playerctl play-pause"
+          ",xf86audiopause, exec, playerctl play-pause"
+          ",xf86audiomute,exec, swayosd-client --output-volume mute-toggle "
           ",xf86audionext, exec, playerctl next"
-          ", xf86audioprev, exec, playerctl previous"
+          ",xf86audioprev, exec, playerctl previous"
 
           # "supershift, a, hyprexpo:expo,toggle"
         ]

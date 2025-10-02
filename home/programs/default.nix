@@ -5,4 +5,5 @@
     ./waybar
     ./firefox
   ];
+  programs.gh.enable = true;
 }

@@ -5,7 +5,6 @@
 }: {
   xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
   imports = [inputs.hyprland.nixosModules.default];
-  environment.systemPackages = [pkgs.kitty];
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   # enable hyprland and required options
   programs.hyprland = {

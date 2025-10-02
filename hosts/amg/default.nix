@@ -12,7 +12,7 @@
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
-      intel-media-driver # Enable Hardware Acceleration
+      intel-media-driver
     ];
   };
   environment.systemPackages = [

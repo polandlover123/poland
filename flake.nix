@@ -7,42 +7,27 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nh = {
-      url = "github:viperml/nh";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     ags.url = "github:aylur/ags";
     astal.url = "github:aylur/astal";
     hyprland.url = "github:hyprwm/Hyprland";
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
   };
 
   outputs = {
     self,
     nixpkgs,
+    determinate,
     ...
-  } @ inputs: let
-    pkgs = import nixpkgs {
-      config.allowUnfree = true;
-      system = "x86_64-linux";
-      overlays = [
-        (import ./overlays/default.nix)
-      ];
-    };
-  in {
+  } @ inputs: {
     nixosConfigurations = {
       amg = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit self inputs;};
         modules = [
           ./configuration.nix
           ./hosts/amg/default.nix
+          determinate.nixosModules.default
         ];
       };
-    };
-    packages.x86_64-linux = {
-      default = self.packages.${pkgs.system}.mactahoe-icons;
-      mactahoe-icons = pkgs.mactahoe-icons;
-      mactahoe-theme = pkgs.mactahoe-theme;
-      sfpro = pkgs.sf-pro;
     };
   };
 }

@@ -4,8 +4,9 @@ import { execAsync } from "ags/process"
 import { createPoll } from "ags/time"
 import Clock from "./Clock"
 import Submap from "./Submap"
-import Battery from "./Battery"
-import Wifi from "./Wifi"
+import BarBattery from "./Battery"
+import Wifi from "./Network"
+import Bluetooth from "./Bluetooth"
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const time = createPoll("", 1000, "date")
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
@@ -29,8 +30,10 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         <box $type="center" class="notch">
           something
         </box>
-        <box $type="end">
-          <Battery/>
+        <box $type="end" class="endbox">
+          <Bluetooth/>
+          <Wifi/>
+          <BarBattery/>
           <Clock/>
         </box>
       </centerbox>

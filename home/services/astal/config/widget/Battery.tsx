@@ -1,14 +1,71 @@
-import { createBinding } from "ags"
-import AstalBattery from "gi://AstalBattery"
+import { createBinding, createComputed } from "ags"
+
+import Battery from "gi://AstalBattery"
+import PowerProfiles from "gi://AstalPowerProfiles"
 
 
-export default function Battery() {
-  const battery = AstalBattery.get_default();
-  const icone = createBinding(battery,"battery_icon_name")
-  return <box class="battery">
-    <image iconName={icone}/>
-    <label label={createBinding(battery, "percentage").as(p =>
-         `${Math.floor(p * 100)} %`
-    )} />
-  </box>
-}      
+function batIcon(percent: number) {
+  if (percent >= 100) return "󰁹"
+  if (percent >= 90) return "󰂂"
+  if (percent >= 80) return "󰂁"
+  if (percent >= 70) return "󰂀"
+  if (percent >= 60) return "󰁿"
+  if (percent >= 50) return "󰁾"
+  if (percent >= 40) return "󰁽"
+  if (percent >= 30) return "󰁼"
+  if (percent >= 20) return "󰁻"
+  if (percent >= 10) return "󰁺"
+  return "󰂎"
+}
+
+
+export default function BarBattery(): JSX.Element {
+  const battery = Battery.get_default()
+  const powerprofiles = PowerProfiles.get_default()
+
+  if (battery.deviceType === 0) return (<box />)
+
+  const bat_status = createComputed([
+    createBinding(battery, 'percentage'),
+    createBinding(battery, 'charging'),
+    createBinding(powerprofiles, 'active_profile'),
+  ], (percentage, charging, profile) => {
+    let label = ""
+    const percent = Math.round(percentage * 100)
+
+    label += profile === 'power-saver' ? "󰌪 " : ""
+    label += batIcon(percent)
+    label += charging ? "󱐋" : ""
+
+    return label
+  })
+
+  const tooltip_text = createComputed([
+    createBinding(battery, 'percentage'),
+    createBinding(battery, 'charging'),
+    createBinding(powerprofiles, 'active_profile'),
+  ], (percentage, charging, profile) => {
+    const percent = percentage * 100
+    return `${percent}% (${charging ? "charging": "not charging"})\n${profile}`
+  })
+
+
+  function onClicked() {
+    switch (powerprofiles.active_profile) {
+      case 'balanced':
+        powerprofiles.active_profile = 'power-saver'
+        break
+      default:
+        powerprofiles.active_profile = 'balanced'
+        break
+    }
+  }
+
+  return (
+    <button onClicked={onClicked}>
+      <box class="battery">
+        <label tooltipText={tooltip_text} label={bat_status} />
+      </box>
+    </button>
+  )
+}
