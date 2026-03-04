@@ -28,13 +28,12 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
           </box>
         </box>
         <box $type="center" class="notch">
-          something
+          <Clock/>
         </box>
         <box $type="end" class="endbox">
           <Bluetooth/>
           <Wifi/>
           <BarBattery/>
-          <Clock/>
         </box>
       </centerbox>
     </window>

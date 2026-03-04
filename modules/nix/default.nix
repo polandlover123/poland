@@ -9,6 +9,7 @@
     ./nh.nix
     ./nixpkgs.nix
   ];
+  documentation.enable = false; # eval speed
   nix = {
     # pin the registry to avoid downloading and evaling a new nixpkgs version every time
     registry = lib.mapAttrs (_: v: {flake = v;}) inputs;
@@ -18,10 +19,11 @@
 
     settings = {
       eval-cores = 0;
+      lazy-trees = true;
       accept-flake-config = true;
       auto-optimise-store = true;
       builders-use-substitutes = true;
-      experimental-features = ["nix-command" "flakes" "parallel-eval"];
+      experimental-features = ["nix-command" "flakes"];
       flake-registry = "/etc/nix/registry.json";
       keep-going = true;
       # for direnv GC root

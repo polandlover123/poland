@@ -7,10 +7,17 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ags.url = "github:aylur/ags";
-    astal.url = "github:aylur/astal";
-    hyprland.url = "github:hyprwm/Hyprland";
+    niri-scratchpad-flake = {
+      url = "github:gvolpe/niri-scratchpad";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    niri.url = "github:sodiboo/niri-flake";
+    spicetify.url = "github:gerg-l/spicetify-nix";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -23,9 +30,10 @@
       amg = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit self inputs;};
         modules = [
+          determinate.nixosModules.default
           ./configuration.nix
           ./hosts/amg/default.nix
-          determinate.nixosModules.default
+          # determinate.nixosModules.default
         ];
       };
     };

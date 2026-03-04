@@ -20,7 +20,6 @@
   ];
   programs = {
     seahorse.enable = true;
-    ssh.startAgent = true;
   };
   services.upower.enable = true;
   programs.steam.enable = true;
@@ -33,4 +32,8 @@
       inherit self;
     };
   };
+  swapDevices = [{
+    device = "/swapfile";
+    size = 32 * 1024; # 16GB
+  }];
 }

@@ -4,14 +4,12 @@
   ...
 }: {
   home = {
-    sessionVariables.GTK_THEME = "MacTahoe-Dark";
     packages = with pkgs; [dconf];
   };
   dconf = {
     enable = true;
     settings = {
       "org/gnome/desktop/interface" = {
-        gtk-theme = "MacTahoe-Dark";
         color-scheme = "prefer-dark";
       };
       "org/gtk/settings/file-chooser" = {
@@ -27,18 +25,20 @@
   };
   gtk = {
     enable = true;
-    theme = {
-      name = "MacTahoe-Dark";
-      package = pkgs.mactahoe-theme;
+    gtk3 = {
+      enable = true;
+      theme = {
+        name = "adw-gtk3-dark";
+        package = pkgs.adw-gtk3;
+      };
     };
-    iconTheme = {
-      name = "MacTahoe-dark";
-      package = pkgs.mactahoe-icons;
-    };
-    font = {
-      name = "SF Pro Display";
-      size = 12;
-      package = pkgs.sf-pro;
+
+    gtk4 = {
+      enable = true;
+      theme = {
+        name = "adw-gtk3-dark";
+        package = pkgs.adw-gtk3;
+      };
     };
   };
 }

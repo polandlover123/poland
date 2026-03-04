@@ -2,7 +2,7 @@
   imports = [
     ./fonts
     ./gtk
-    ./astal
     ./polkit
   ];
+  services.mpris-proxy.enable = true;
 }

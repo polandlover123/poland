@@ -8,7 +8,7 @@
           style = "Regular";
         };
         bold = {
-          family = "JetbrainsMono Nerd Font";
+          family = "JetBrainsMono Nerd Font";
           style = "Bold";
         };
         italic = {

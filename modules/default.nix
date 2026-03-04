@@ -4,6 +4,7 @@
     ./desktop
     ./security
     ./services
+    ./boot
     ./users.nix
   ];
   services.fwupd.enable = true;
