@@ -9,10 +9,15 @@
     inputs.home-manager.nixosModules.default
     ../../modules
   ];
+  services.xserver.videoDrivers = [ "modesetting" ];
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "iHD";     # Prefer the modern iHD backend
+  };
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
       intel-media-driver
+      vpl-gpu-rt
     ];
   };
   environment.systemPackages = [

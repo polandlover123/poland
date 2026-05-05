@@ -4,5 +4,5 @@
     ./ssh
   ];
   services.fwupd.enable = true;
-  services.logind.lidSwitch = "sleep";
+  services.logind.settings.Login.HandleLidSwitch = "sleep";
 }

@@ -7,10 +7,12 @@
     ./boot
     ./users.nix
   ];
+  services.power-profiles-daemon.enable = true;
+  services.flatpak.enable = true;
   services.fwupd.enable = true;
   services.avahi = {
     enable = true;
-    nssmdns = true; # printing
+    nssmdns4 = true; # printing
     publish = {
       enable = true;
       addresses = true;

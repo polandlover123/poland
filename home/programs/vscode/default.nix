@@ -1,6 +1,7 @@
 {pkgs,...}:{
     home.packages = [
         pkgs.nixd
+        pkgs.nixfmt
     ];
     programs = {
         vscode = {
