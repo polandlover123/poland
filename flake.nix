@@ -30,7 +30,6 @@
       amg = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit self inputs;};
         modules = [
-          (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
           determinate.nixosModules.default
           ./configuration.nix
           ./hosts/amg/default.nix
