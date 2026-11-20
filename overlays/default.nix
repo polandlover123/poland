@@ -1,3 +1,3 @@
-final: prev: {
-  sf-pro = prev.callPackage ../pkgs/sfpro {};
-}
+# final: prev: {
+#   sf-pro = prev.callPackage ../pkgs/sfpro {};
+# }

@@ -11,6 +11,12 @@
   nixpkgs.overlays = [inputs.niri.overlays.niri];
   programs.niri = {
     enable = true;
-    package = pkgs.niri-unstable;
+    package = pkgs.niri;
   };
+  security.polkit.enable = true;
+  services.displayManager.dms-greeter = {
+    enable = true;
+    compositor.name = "niri";
+  };
+  systemd.user.services.niri-flake-polkit.enable = false;
 }

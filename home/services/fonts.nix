@@ -1,8 +1,10 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
+  nixpkgs.overlays = [ inputs.apple-fonts.overlays.default ];
   home.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans
@@ -10,17 +12,15 @@
     nerd-fonts.jetbrains-mono
     twemoji-color-font
     fira-sans
-    sf-pro
-    victor-mono
-    nerd-fonts.victor-mono
+    atkinson-hyperlegible-next
+    inputs.apple-fonts.packages.${pkgs.system}.sf-pro
   ];
   fonts.fontconfig = {
     enable = true;
     antialiasing = true;
-    subpixelRendering = "rgb";
     defaultFonts = {
-      serif = ["SF Pro Display"];
-      sansSerif = ["SF Pro Display"];
+      serif = ["Atkinson Hyperlegible Next"];
+      sansSerif = ["Atkinson Hyperlegible Next"];
       monospace = ["Jetbrains Mono"];
     };
   };

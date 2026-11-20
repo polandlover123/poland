@@ -3,7 +3,7 @@
     isNormalUser = true;
     description = "admin";
     shell = pkgs.zsh;
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "input" "librepods"];
   };
   programs.zsh.enable = true;
 }

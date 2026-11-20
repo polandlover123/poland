@@ -1,11 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   # Bootloader.
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -15,7 +11,6 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Edmonton";
@@ -24,18 +19,12 @@
   i18n.defaultLocale = "en_CA.UTF-8";
 
   # Enable the X11 windowing system.
-  services.displayManager.gdm.enable = true;
 
   # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
   # Enable sound with pipewire.
-  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;

@@ -5,7 +5,7 @@
 }: {
   # ...
   boot = {
-    zfs.forceImportRoot =  false;
+    zfs.forceImportRoot = false;
     loader = {
       grub = {
         enable = true;

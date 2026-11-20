@@ -9,9 +9,9 @@
     inputs.home-manager.nixosModules.default
     ../../modules
   ];
-  services.xserver.videoDrivers = [ "modesetting" ];
+  services.xserver.videoDrivers = ["modesetting"];
   environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "iHD";     # Prefer the modern iHD backend
+    LIBVA_DRIVER_NAME = "iHD"; # Prefer the modern iHD backend
   };
   hardware.graphics = {
     enable = true;
@@ -28,7 +28,7 @@
   };
   services.upower.enable = true;
   programs.steam.enable = true;
-  networking.hostName = "amg";
+  networking.hostName = "dingus";
   home-manager = {
     backupFileExtension = ".hmbak";
     users."admin" = import ../../home/homes/amg;
@@ -37,8 +37,10 @@
       inherit self;
     };
   };
-  swapDevices = [{
-    device = "/swapfile";
-    size = 32 * 1024; # 16GB
-  }];
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 32 * 1024; # 16GB
+    }
+  ];
 }

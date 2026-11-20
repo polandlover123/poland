@@ -13,9 +13,9 @@
   };
 
   nixpkgs = {
-    overlays = [
-      (import ../overlays/default.nix)
-    ];
+    # overlays = [
+    #   (import ../overlays/default.nix)
+    # ];
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;

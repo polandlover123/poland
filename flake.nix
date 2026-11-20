@@ -7,15 +7,26 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    apple-fonts = {
+      url = "github:lyndeno/apple-fonts.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     niri-scratchpad-flake = {
       url = "github:gvolpe/niri-scratchpad";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    niri.url = "github:sodiboo/niri-flake";
+    niri.url = "github:epireyn/niri-flake";
     spicetify.url = "github:gerg-l/spicetify-nix";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     dms = {
-      url = "github:AvengeMedia/DankMaterialShell/stable";
+      url = "github:duxlabs-dev/dux-shell/stable";
+    };
+    dfiles = {
+      url = "github:duxlabs-dev/dux-files";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dsearch = {
+      url = "github:duxlabs-dev/dux-search";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -27,7 +38,7 @@
     ...
   } @ inputs: {
     nixosConfigurations = {
-      amg = nixpkgs.lib.nixosSystem {
+      dingus = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit self inputs;};
         modules = [
           determinate.nixosModules.default
