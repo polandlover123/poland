@@ -4,7 +4,7 @@
   inputs,
   ...
 }: {
-  nixpkgs.overlays = [ inputs.apple-fonts.overlays.default ];
+  nixpkgs.overlays = [inputs.apple-fonts.overlays.default];
   home.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans

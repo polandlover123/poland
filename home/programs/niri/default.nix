@@ -17,7 +17,6 @@
     dsearch.enable = true;
     dux-files = {
       enable = true;
-      quickshell.package = pkgs.quickshell;
       systemd = {
         enable = true;
         target = "graphical-session.target";

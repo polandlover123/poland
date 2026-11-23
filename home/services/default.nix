@@ -1,9 +1,8 @@
 {
   imports = [
     ./gtk.nix
-    ./polkit.nix
-    ./printing.nix
     ./fonts.nix
+    ./easyeffects
   ];
   services.mpris-proxy.enable = true;
 }

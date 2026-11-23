@@ -29,6 +29,8 @@
       url = "github:duxlabs-dev/dux-search";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -42,7 +44,6 @@
         specialArgs = {inherit self inputs;};
         modules = [
           determinate.nixosModules.default
-          ./configuration.nix
           ./hosts/amg/default.nix
           # determinate.nixosModules.default
         ];

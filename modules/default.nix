@@ -7,6 +7,8 @@
     ./boot
     ./users.nix
   ];
+  time.timeZone = "America/Edmonton";
+  i18n.defaultLocale = "en_CA.UTF-8";
   networking.networkmanager.enable = true;
   services.tailscale = {
     enable = true;

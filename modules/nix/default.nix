@@ -1,6 +1,4 @@
 {
-  self,
-  pkgs,
   inputs,
   lib,
   ...
@@ -8,7 +6,9 @@
   imports = [
     ./nh.nix
     ./nixpkgs.nix
+    inputs.nix-index-database.nixosModules.default
   ];
+  programs.nix-index-database.comma.enable = true;
   documentation.enable = false; # eval speed
   nix = {
     # pin the registry to avoid downloading and evaling a new nixpkgs version every time
